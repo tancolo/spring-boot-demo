@@ -1,10 +1,14 @@
 package com.shrimpcolo.springbootrestapplication.jpa;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UserRepository extends CrudRepository<User, Long>, JpaSpecificationExecutor<User> {
 
-    List<User> findByName(String name);
+    Iterable<User> findByName(String name);
+
+    Iterable<User> findByNameContainingIgnoreCase(String name);
+
 }
