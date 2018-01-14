@@ -32,7 +32,9 @@ repositories {
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-devtools')
-    compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+//    xml格式
+//    compile('com.fasterxml.jackson.dataformat:jackson-dataformat-xml')
+
 //    actuator dependency
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile('org.springframework.data:spring-data-rest-hal-browser')

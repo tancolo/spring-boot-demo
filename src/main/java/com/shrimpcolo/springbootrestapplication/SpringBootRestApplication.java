@@ -1,4 +1,4 @@
-package com.shrimpcolo.springbootrestapplication.controller;
+package com.shrimpcolo.springbootrestapplication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 
 @SpringBootApplication
-@ComponentScan("com.shrimpcolo.springbootrestapplication")
-@EnableJpaRepositories("com.shrimpcolo.springbootrestapplication.jpa")
-@EntityScan("com.shrimpcolo.springbootrestapplication.jpa")
+//@ComponentScan("com.shrimpcolo.springbootrestapplication")
+//@EnableJpaRepositories("com.shrimpcolo.springbootrestapplication.jpa")
+//@EntityScan("com.shrimpcolo.springbootrestapplication.jpa")
 public class SpringBootRestApplication {
 
     public static void main(String[] args) {
