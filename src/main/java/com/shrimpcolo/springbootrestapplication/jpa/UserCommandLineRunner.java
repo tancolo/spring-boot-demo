@@ -29,6 +29,15 @@ public class UserCommandLineRunner implements CommandLineRunner {
         for (User user : repository.findAll()) {
             log.info(user.toString());
         }
+
+        log.info("-------------------------------");
+        log.info("Admin users are......");
+        log.info("-------------------------------");
+
+        for (User user: repository.findByRole("Admin")) {
+            log.info(user.toString());
+        }
+
     }
 
 

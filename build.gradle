@@ -38,11 +38,12 @@ dependencies {
 //    actuator dependency
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile('org.springframework.data:spring-data-rest-hal-browser')
-    testCompile('org.springframework.boot:spring-boot-starter-test')
 
 //    JPA
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('com.h2database:h2')
-//    compile('org.springframework.boot:spring-boot-starter-data-rest')
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
 
+//    test
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

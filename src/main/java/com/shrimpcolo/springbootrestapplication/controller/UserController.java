@@ -1,24 +1,25 @@
 package com.shrimpcolo.springbootrestapplication.controller;
 
 import com.shrimpcolo.springbootrestapplication.jpa.User;
-import com.shrimpcolo.springbootrestapplication.jpa.UserCommandLineRunner;
-import com.shrimpcolo.springbootrestapplication.jpa.UserRepository;
+import com.shrimpcolo.springbootrestapplication.jpa.UserInfo;
+import com.shrimpcolo.springbootrestapplication.jpa.UserRestRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("user")
+@RequestMapping("/users")
 public class UserController {
     private static final Logger log = LoggerFactory.getLogger(UserController.class);
 
+//    @Autowired
+//    private UserRepository repository;
+
     @Autowired
-    private UserRepository repository;
+    private UserRestRepository repository;
 
     // path/user/
     @GetMapping
@@ -36,12 +37,14 @@ public class UserController {
         return repository.findById(id);
     }
 
-//    @GetMapping
-//    public Iterable<User> findUserByName(@RequestParam("name") String name) {
-//        List<User> list = repository.findByName(name);
-//        log.info("TANHQ===> list.size = " + list.size());
-//        return repository.findByName(name);
-//    }
+    @PostMapping
+    public User createNewUser(@RequestBody UserInfo info) {
+        System.out.println("TANHQ====> info = " + info);
+        User user = new User(info.getName(), info.getRole());
+        repository.save(user);
+
+        return user;
+    }
 
 
 }

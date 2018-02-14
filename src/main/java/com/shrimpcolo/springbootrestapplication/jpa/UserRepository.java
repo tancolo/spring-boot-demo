@@ -11,4 +11,6 @@ public interface UserRepository extends CrudRepository<User, Long>, JpaSpecifica
 
     Iterable<User> findByNameContainingIgnoreCase(String name);
 
+    List<User> findByRole(String role);
+
 }
