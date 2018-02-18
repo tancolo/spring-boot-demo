@@ -19,7 +19,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.matchers.JUnitMatchers.containsString;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SpringBootRestApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -85,12 +87,30 @@ public class SurveyControllerTest {
                 Arrays.asList("India", "Russia", "United States", "China"));
 
         assertTrue(bodyQuestions.contains(sampleQuestion));
+    }
 
-//        try {
-//            JSONAssert.assertEquals(expected, body, false);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+    @Test
+    public void addQuestionsToSurvey() {
+        // step 1. expected, url
+        String url = "/surveys/Survey1/questions";
+
+        // step 2. Questioin
+        Question question = new Question("DOESN'T MATTER",
+                "Smallest Number",
+                "1",
+                Arrays.asList("1", "2", "3", "4"));
+
+        // step 2. Request & ResponseEntity
+        ResponseEntity<String> response = restTemplate.exchange(
+                createUrl(url),
+                HttpMethod.POST,
+                new HttpEntity<>(question, headers),
+                String.class);
+
+        // step assert
+        assertThat(response.getHeaders().get(HttpHeaders.LOCATION).get(0),
+                containsString("/surveys/Survey1/questions/"));
 
     }
+
 }
