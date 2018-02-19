@@ -44,6 +44,9 @@ dependencies {
     compile('com.h2database:h2')
     compile('org.springframework.boot:spring-boot-starter-data-rest')
 
+    // security
+    compile ('org.springframework.boot:spring-boot-starter-security')
+
 //    test
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
