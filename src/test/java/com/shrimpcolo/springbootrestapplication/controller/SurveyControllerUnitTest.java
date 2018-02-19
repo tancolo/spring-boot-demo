@@ -31,7 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * 单元测试
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(SurveyController.class)
+@WebMvcTest(value = SurveyController.class, secure = false) // 不使用security
 public class SurveyControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
