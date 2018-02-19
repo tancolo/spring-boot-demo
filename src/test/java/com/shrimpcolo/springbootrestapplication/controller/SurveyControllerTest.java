@@ -33,23 +33,20 @@ public class SurveyControllerTest {
     private int port;
 
     private TestRestTemplate restTemplate = new TestRestTemplate();
-    private HttpHeaders headers = createHttpHeaders("user1", "secret1");
+    private HttpHeaders headers = new HttpHeaders();
 
-    private HttpHeaders createHttpHeaders(String userId, String password) {
-        HttpHeaders headers = new HttpHeaders();
+    private String createHttpAuthenticationHeaderValue(String userId, String password) {
         // userid, password, Basic
         // "Authorization", "Basic" + Base64Encoding(userId + ":" + password)
         String auth = userId + ":" + password;
 
         byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(Charset.forName("US-ASCII")));
-        String headerValue = "Basic " + new String(encodedAuth);
-        headers.add("Authorization", headerValue);
-
-        return headers;
+        return String.format("Basic %s", new String(encodedAuth));
     }
 
     @Before
-    public void setUpJSONAcceptType() {
+    public void before() {
+        headers.add("Authorization", createHttpAuthenticationHeaderValue("user1", "secret1"));
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
     }
 
