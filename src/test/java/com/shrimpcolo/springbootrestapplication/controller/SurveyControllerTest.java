@@ -15,7 +15,9 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.nio.charset.Charset;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,7 +33,20 @@ public class SurveyControllerTest {
     private int port;
 
     private TestRestTemplate restTemplate = new TestRestTemplate();
-    private HttpHeaders headers = new HttpHeaders();
+    private HttpHeaders headers = createHttpHeaders("user1", "secret1");
+
+    private HttpHeaders createHttpHeaders(String userId, String password) {
+        HttpHeaders headers = new HttpHeaders();
+        // userid, password, Basic
+        // "Authorization", "Basic" + Base64Encoding(userId + ":" + password)
+        String auth = userId + ":" + password;
+
+        byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(Charset.forName("US-ASCII")));
+        String headerValue = "Basic " + new String(encodedAuth);
+        headers.add("Authorization", headerValue);
+
+        return headers;
+    }
 
     @Before
     public void setUpJSONAcceptType() {
